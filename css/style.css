@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom, #0f1729, #1e293b);
+    height: 100vh;
+    overflow: hidden;
+    color: #e2e8f0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    text-align: center;
+    color: #f1f5f9;
+    font-size: 2rem;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(148, 163, 184, 0.5);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #f1f5f9;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(148, 163, 184, 0.5);
+}
+
+.map-container {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    background: rgba(15, 23, 42, 0.7);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+                0 12px 24px -4px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+}
+
+#map {
+    flex: 1;
+    min-height: 500px;
+    z-index: 1;
+}
+
+.location-list {
+    width: 300px;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.8);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-y: auto;
+}
+
+.location-list h2 {
+    color: #f1f5f9;
+    margin: 0 0 16px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(148, 163, 184, 0.3);
+}
+
+.location-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: rgba(30, 41, 59, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.location-item:hover {
+    background: rgba(51, 65, 85, 0.5);
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.location-text {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.location-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.location-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.mini-marker {
+    width: 12px;
+    height: 12px;
+    background: #2563eb;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+}
+
+.marker-outer {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.marker-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, rgba(37, 99, 235, 0) 70%);
+    border-radius: 50%;
+    animation: pulse 2s ease-out infinite;
+}
+
+.marker-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: #2563eb;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.6);
+}
+
+.marker-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #2563eb;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.marker-hover .marker-core {
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.8);
+}
+
+.marker-hover .marker-ring {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+}
+
+.custom-popup.modern .leaflet-popup-content-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 12px 24px -4px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+.custom-popup.modern .leaflet-popup-content {
+    margin: 16px;
+    color: #1e293b;
+    min-width: 220px;
+}
+
+.custom-popup.modern .leaflet-popup-tip {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.popup-content h3 {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.popup-details {
+    background: rgba(241, 245, 249, 0.9);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.popup-details p {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    color: #64748b;
+}
+
+.popup-details .label {
+    color: #1e293b;
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+.glow-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5em;
+    color: #f1f5f9;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.8);
+    padding: 20px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    backdrop-filter: blur(12px);
+    text-shadow: 0 0 20px rgba(148, 163, 184, 0.5);
+}
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    margin-top: 20px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Star background animation */
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+.star {
+    position: fixed;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--twinkle-duration) ease-in-out infinite;
+    z-index: 0;
+}
+
+@media (max-width: 768px) {
+    .map-container {
+        flex-direction: column;
+    }
+    
+    #map {
+        height: 60vh;
+    }
+    
+    .location-list {
+        height: 40vh;
+    }
+    
+    .glow-text {
+        font-size: 1.8em;
+        padding: 16px 32px;
+    }
+}

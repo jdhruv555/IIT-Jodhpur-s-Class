@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIT Jodhpur's Class Map - Student Locations</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        #stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: #fff;
+            animation: twinkle linear infinite;
+        }
+        @keyframes twinkle {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="stars"></div>
+    <div class="container">
+        <header>
+            <h1>IIT Jodhpur's Class Across India</h1>
+        </header>
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="location-list">
+                <h2>Our Students</h2>
+                <div id="locations"></div>
+            </div>
+        </div>
+        <div id="glowText" class="glow-text"></div>
+        <footer class="footer">
+            Made by Dhruv Jha | All Rights Reserved
+        </footer>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/locations.js"></script>
+    <script src="js/map.js"></script>
+    <script>
+        // Create twinkling stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.width = `${Math.random() * 3}px`;
+            star.style.height = star.style.width;
+            star.style.setProperty('--twinkle-duration', `${2 + Math.random() * 3}s`);
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>

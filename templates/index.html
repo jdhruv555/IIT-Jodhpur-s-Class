@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive India Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        .custom-popup .leaflet-popup-content-wrapper {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .custom-popup .leaflet-popup-content {
+            margin: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map centered on India
+        const map = L.map('map').setView([23.5937, 78.9629], 5);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Location data
+        const locations = [
+            { name: "Parteek Deeva", district: "Bhiwani", state: "Haryana", coords: [28.7833, 76.1333] },
+            { name: "Armaan", district: "Bikaner", state: "Rajasthan", coords: [28.0229, 73.3119] },
+            { name: "Kanchan Gupta", location: "Chandigarh", coords: [30.7333, 76.7794] },
+            { name: "Mahendra Beniwal", location: "Jodhpur", state: "Rajasthan", coords: [26.2389, 73.0243] },
+            { name: "Nitesh Yadav", district: "Mirzapur", state: "Uttar Pradesh", coords: [25.1337, 82.5644] },
+            { name: "Deo Aryan", location: "Patna", state: "Bihar", coords: [25.5941, 85.1376] },
+            { name: "Sukanya S", district: "Rangareddy", state: "Telangana", coords: [17.3891, 78.4483] },
+            { name: "Abbas (M Q Abbas)", location: "Delhi", coords: [28.6139, 77.2090] },
+            { name: "Apoorva Sharma", location: "Jaipur", state: "Rajasthan", coords: [26.9124, 75.7873] },
+            { name: "Dhruv Jha", location: "Dhanbad", state: "Jharkhand", coords: [23.7957, 86.4304] }
+        ];
+
+        // Add markers for each location
+        locations.forEach(loc => {
+            const marker = L.marker(loc.coords).addTo(map);
+            
+            // Create popup content
+            let popupContent = `<strong>${loc.name}</strong><br>`;
+            if (loc.district) popupContent += `District: ${loc.district}<br>`;
+            if (loc.state) popupContent += `State: ${loc.state}`;
+            
+            // Add popup to marker
+            marker.bindPopup(popupContent, {
+                className: 'custom-popup'
+            });
+        });
+
+        // Add click event to zoom to marker when clicked
+        map.on('popupopen', function(e) {
+            map.setView(e.popup.getLatLng(), 10);
+        });
+    </script>
+</body>
+</html>

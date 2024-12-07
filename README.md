@@ -9,20 +9,6 @@ An interactive web application that displays locations of various individuals ac
 - Popup information showing person's name, district, and state
 - Automatic zoom to location when marker is clicked
 
-## Setup
-
-1. Install the required dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-2. Run the Flask application:
-```bash
-python app.py
-```
-
-3. Open your web browser and navigate to `http://localhost:5000`
-
 ## Usage
 
 - Click on any marker to view the person's details

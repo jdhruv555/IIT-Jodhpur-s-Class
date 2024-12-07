@@ -1,4 +1,4 @@
-# Interactive India Map
+# Interactive India Map for IIT Jodhpur's Class
 
 An interactive web application that displays locations of various individuals across India using Flask and Leaflet.js.
 
